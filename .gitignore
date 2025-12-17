@@ -1,0 +1,222 @@
+# Operating System Files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.iml
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# Build Artifacts
+node_modules/
+/dist/
+/build/
+*.o
+*.a
+*.so
+*.exe
+*.dll
+*.dylib
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+
+# Coverage
+/coverage/
+.nyc_output/
+
+# Package Management
+package-lock.json
+yarn.lock
+composer.lock
+
+# Sensitive Data
+*.pem
+*.key
+*.crt
+*.p8
+.env
+secrets.json
+credentials.json
+
+# Temporary Files
+*.tmp
+*.temp
+*.bak
+*.backup
+*~
+.~*
+
+# Cache
+.cache/
+*.cache
+.eslintcache
+
+# Test Coverage
+coverage/
+.coverage
+*.cover
+
+# OS Generated Files
+desktop.ini
+.DS_Store
+ehthumbs.db
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+*.sqlitedb
+
+# Backup Files
+*.backup
+*.bak
+*.old
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+.pytest_cache/
+.tox/
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# PHP
+vendor/
+composer.phar
+.env
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Ruby
+Gemfile.lock
+
+# Go
+*.exe
+*.dll
+*.so
+*.dylib
+bin/
+dist/
+
+# Rust
+target/
+Cargo.lock
+
+# Generated Files from Security Testing
+/reports/
+/scans/
+*.pcap
+*.cap
+
+# Sensitive Test Data
+test-credentials.txt
+test-keys.pem
+test-passwords.txt
+payload-logs.txt
+
+# Binary Files
+*.exe
+*.bin
+*.hex
+
+# Compression
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
+
+# IDE Specific
+.vscode/
+.idea/
+*.swp
+*.swo
+vscode-settings.json
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+.Spotlight-V100
+.Trashes
+
+# Windows
+desktop.ini
+$RECYCLE.BIN/
+ehthumbs.db
+Thumbs.db
+
+# Build Directories
+build/
+dist/
+.gradle/
+.maven/
+
+# Testing
+.pytest_cache/
+.tox/
+.coverage
+htmlcov/
+
+# Temporary
+*.tmp
+*.temp
+.scratch/
+
+# Vulnerable Components
+node_modules/jquery/
+node_modules/log4j/
+
+# Secrets (Double Check)
+*.pem
+*.key
+*.p12
+*.pfx
+.env*
+!.env.example
+!.env.sample
