@@ -5,6 +5,21 @@
 ### Project Overview
 This repository contains comprehensive security testing analysis for web applications, identifying and documenting vulnerabilities such as SQL Injection, Cross-Site Scripting (XSS), and other OWASP Top 10 vulnerabilities.
 
+## Test Target: OWASP Juice Shop
+
+**URL**: `https://juice-shop.herokuapp.com/`
+
+OWASP Juice Shop is an intentionally insecure web application for learning web application security. It contains intentional vulnerabilities that can be exploited for educational purposes.
+
+**Alternative (Local Deployment)**: `http://localhost:3000/` (after Docker installation)
+
+Docker command to run locally:
+```bash
+docker run --rm -p 3000:3000 bkimminich/juice-shop
+```
+
+
+
 ### Objectives
 - Identify security vulnerabilities in web applications
 - Document findings with proof of concept
