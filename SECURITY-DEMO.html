@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 3: Security Testing Live Demo</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 950px;
+            padding: 40px;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .demo-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #e74c3c;
+        }
+        .demo-section h2 {
+            color: #e74c3c;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        .vulnerability {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 6px;
+            border: 1px solid #e0e0e0;
+        }
+        .vulnerability .title {
+            font-weight: bold;
+            color: #d63031;
+            margin-bottom: 8px;
+        }
+        .vulnerability .description {
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        button {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-test {
+            background: #e74c3c;
+            color: white;
+        }
+        .btn-test:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231,76,60,0.3);
+        }
+        .btn-safe {
+            background: #27ae60;
+            color: white;
+        }
+        .btn-safe:hover {
+            background: #229954;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(39,174,96,0.3);
+        }
+        .result-box {
+            margin-top: 10px;
+            padding: 12px;
+            background: #fff3cd;
+            border-radius: 4px;
+            border-left: 3px solid #ffc107;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            color: #333;
+        }
+        .vulnerability-list {
+            list-style: none;
+            padding: 0;
+        }
+        .vulnerability-list li {
+            padding: 10px;
+            margin: 8px 0;
+            background: white;
+            border-radius: 4px;
+            border-left: 3px solid #e74c3c;
+            color: #555;
+        }
+        .severity {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .critical { background: #d63031; color: white; }
+        .high { background: #e17055; color: white; }
+        .medium { background: #fdcb6e; color: #333; }
+        .info-box {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            color: #0c5460;
+            font-size: 14px;
+        }
+        .owasp-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .owasp-item {
+            padding: 12px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Security Testing Demo</h1>
+        <p class="subtitle">Interactive Web Application Security Testing</p>
+        
+        <div class="info-box">
+            This interactive demo demonstrates common web vulnerabilities and their detection methods using OWASP Juice Shop.
+        </div>
+        
+        <div class="demo-section">
+            <h2>1. SQL Injection Vulnerability</h2>
+            <div class="vulnerability">
+                <div class="title">Test SQL Injection on Login</div>
+                <div class="description">Attempt to bypass authentication using SQL injection</div>
+                <div class="button-group">
+                    <button class="btn-test" onclick="testSQLInjection()">Test SQL Injection</button>
+                    <button class="btn-safe" onclick="showSQLFix()">View Secure Code</button>
+                </div>
+                <div id="sqlResult"></div>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>2. Cross-Site Scripting (XSS)</h2>
+            <div class="vulnerability">
+                <div class="title">Test XSS Attack Vector</div>
+                <div class="description">Attempt to inject malicious JavaScript</div>
+                <div class="button-group">
+                    <button class="btn-test" onclick="testXSS()">Test XSS Attack</button>
+                    <button class="btn-safe" onclick="showXSSFix()">View Secure Code</button>
+                </div>
+                <div id="xssResult"></div>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>3. Broken Authentication</h2>
+            <div class="vulnerability">
+                <div class="title">Test Weak Password Handling</div>
+                <div class="description">Identify accounts with weak security practices</div>
+                <div class="button-group">
+                    <button class="btn-test" onclick="testWeakAuth()">Test Weak Authentication</button>
+                    <button class="btn-safe" onclick="showAuthFix()">Best Practices</button>
+                </div>
+                <div id="authResult"></div>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>4. OWASP Juice Shop Vulnerabilities</h2>
+            <div class="info-box" style="margin-top: 0;">
+                OWASP Juice Shop contains intentional vulnerabilities for security training
+            </div>
+            <div class="owasp-grid">
+                <div class="owasp-item">Account Takeover</div>
+                <div class="owasp-item">Zero-Star Backdoor</div>
+                <div class="owasp-item">Privacy Policy</div>
+                <div class="owasp-item">Admin Section Access</div>
+                <div class="owasp-item">Product Tampering</div>
+                <div class="owasp-item">Forgotten Developer Backup</div>
+            </div>
+            <div class="button-group" style="margin-top: 15px;">
+                <button class="btn-test" onclick="showJuiceShopVulns()">Show Top Challenges</button>
+            </div>
+            <div id="juiceResult"></div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>Testing Checklist</h2>
+            <ul class="vulnerability-list">
+                <li>SQL Injection & NoSQL Injection <span class="severity critical">CRITICAL</span></li>
+                <li>Cross-Site Scripting (XSS) <span class="severity critical">CRITICAL</span></li>
+                <li>Cross-Site Request Forgery (CSRF) <span class="severity high">HIGH</span></li>
+                <li>Broken Authentication <span class="severity high">HIGH</span></li>
+                <li>Sensitive Data Exposure <span class="severity high">HIGH</span></li>
+                <li>XML External Entities (XXE) <span class="severity high">HIGH</span></li>
+                <li>Broken Access Control <span class="severity medium">MEDIUM</span></li>
+                <li>Security Misconfiguration <span class="severity medium">MEDIUM</span></li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        function testSQLInjection() {
+            const resultDiv = document.getElementById('sqlResult');
+            resultDiv.innerHTML = `<div class="result-box"><strong>Vulnerability Detected:</strong><br>Input: admin' OR '1'='1<br>Status: SQL Injection attempt blocked by parameterized queries<br>Risk Level: CRITICAL if not prevented</div>`;
+        }
+        
+        function showSQLFix() {
+            const resultDiv = document.getElementById('sqlResult');
+            resultDiv.innerHTML = `<div class="result-box"><strong>Secure Implementation:</strong><br>Use parameterized queries / prepared statements<br>Example: WHERE username = ? AND password = ?<br>Framework Support: All modern frameworks (Laravel, Django, Express)</div>`;
+        }
+        
+        function testXSS() {
+            const resultDiv = document.getElementById('xssResult');
+            resultDiv.innerHTML = `<div class="result-box"><strong>XSS Attack Vector:</strong><br>Input: &lt;script&gt;alert('XSS')&lt;/script&gt;<br>Status: Input sanitized and encoded<br>Prevention: HTML entity encoding + CSP headers</div>`;
+        }
+        
+        function showXSSFix() {
+            const resultDiv = document.getElementById('xssResult');
+            resultDiv.innerHTML = `<div class="result-box"><strong>XSS Prevention:</strong><br>1. Sanitize all user input<br>2. HTML encode output<br>3. Implement Content Security Policy<br>4. Use security libraries (DOMPurify)</div>`;
+        }
+        
+        function testWeakAuth() {
+            const resultDiv = document.getElementById('authResult');
+            resultDiv.innerHTML = `<div class="result-box"><strong>Weak Authentication Found:</strong><br>Issues: Default credentials, weak password policy<br>Affected Accounts: admin/admin, guest/guest<br>Recommendation: Enforce strong MFA and password policies</div>`;
+        }
+        
+        function showAuthFix() {
+            const resultDiv = document.getElementById('authResult');
+            resultDiv.innerHTML = `<div class="result-box"><strong>Authentication Best Practices:</strong><br>1. Implement Multi-Factor Authentication<br>2. Enforce strong password policies<br>3. Use secure session management<br>4. Implement rate limiting on login attempts</div>`;
+        }
+        
+        function showJuiceShopVulns() {
+            const resultDiv = document.getElementById('juiceResult');
+            resultDiv.innerHTML = `<div class="result-box"><strong>Top Challenges in OWASP Juice Shop:</strong><br>1. Find & Restore a Deleted User Account<br>2. Access Admin Section Without Credentials<br>3. Retrieve the Backup File<br>4. Exploit Known Weak Password Hash<br>5. Access Confidential Business Documents<br><br>Target: https://juice-shop.herokuapp.app</div>`;
+        }
+    </script>
+</body>
+</html>
